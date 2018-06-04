@@ -1,46 +1,31 @@
-#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
 #include <iostream>
 
+#include "Graphics/Window.h"
+
 int main()
 {
-	GLFWwindow* window;
+	nuy::graphics::Window window("Nuy Engine", 960, 540);
+	glClearColor(0.2f, 0.3f, 0.8f, 1.0f);
 
-	/* Initialize the library */
-	if (!glfwInit())
-		return -1;
-
-	/* Create a windowed mode window and its OpenGL context */
-	window = glfwCreateWindow(960, 540, "Hello World", NULL, NULL);
-	if (!window)
-	{
-		glfwTerminate();
-		return -1;
-	}
-
-	/* Make the window's context current */
-	glfwMakeContextCurrent(window);
-
-	if (glewInit() != GLEW_OK)
-		std::cout << "Error!" << std::endl;
-
-	// opengl version
 	std::cout << glGetString(GL_VERSION) << std::endl;
 
-	while (!glfwWindowShouldClose(window))
+	while (!window.IsClosed())
 	{
-		/* Swap front and back buffers */
-		glfwSwapBuffers(window);
+		window.Clear();
 
-		/* Poll for and process events */
-		glfwPollEvents();
+		glBegin(GL_QUADS);
+		glVertex2f(-0.5f, -0.5f);
+		glVertex2f(-0.5f,  0.5f);
+		glVertex2f( 0.5f,  0.5f);
+		glVertex2f( 0.5f, -0.5f);
+		glEnd();
+
+		window.Update();
 	}
 
-	glfwTerminate();
 
 
-	std::cout << std::endl << "Press any key to finish..." << std::endl;
-	std::cin.get();
 	return 0;
 }
