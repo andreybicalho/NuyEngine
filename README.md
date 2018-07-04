@@ -1,3 +1,8 @@
 # NuyEngine
 
-This is going to be my very first Game Engine!
+Nuy Game Engine.
+
+## Features
+* 2D and 3D Graphics
+* OpenGL
+* Cross platform

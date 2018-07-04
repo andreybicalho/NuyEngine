@@ -37,9 +37,15 @@ namespace nuy { namespace graphics {
 		}
 
 		glfwMakeContextCurrent(MainWindow);
-
 		glfwSetWindowSizeCallback(MainWindow, windowResize);
 
+		if (glewInit() != GLEW_OK)
+		{
+			std::cout << "Could not initialize GLEW!" << std::endl;
+			return false;
+		}
+
+		std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
 		return true;
 	}
 
