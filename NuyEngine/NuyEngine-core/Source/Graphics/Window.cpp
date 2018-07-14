@@ -2,12 +2,6 @@
 
 namespace nuy { namespace graphics {	
 
-	// NOTE(andrey): static members initialization
-	bool Window::Keys[MAX_KEYS]; 
-	bool Window::MouseButtons[MAX_MOUSE_BUTTONS];
-	double Window::MouseX;
-	double Window::MouseY;
-
 	/*
 		Window Resize Callback. Resizes window viewport.
 	*/
@@ -87,7 +81,7 @@ namespace nuy { namespace graphics {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
-	bool Window::IsKeyPressed(unsigned int keyCode)
+	bool Window::IsKeyPressed(unsigned int keyCode) const
 	{
 		// TODO(andrey): log this
 		if(keyCode >= MAX_KEYS)
@@ -98,7 +92,7 @@ namespace nuy { namespace graphics {
 		return Keys[keyCode];
 	}
 
-	bool Window::IsMouseButtonPressed(unsigned int buttonCode)
+	bool Window::IsMouseButtonPressed(unsigned int buttonCode) const
 	{
 		// TODO(andrey): log this
 		if (buttonCode >= MAX_MOUSE_BUTTONS)
@@ -109,7 +103,7 @@ namespace nuy { namespace graphics {
 		return MouseButtons[buttonCode];
 	}
 
-	void Window::GetMousePosition(double& xpos, double& ypos)
+	void Window::GetMousePosition(double& xpos, double& ypos) const
 	{
 		xpos = MouseX;
 		ypos = MouseY;
@@ -166,7 +160,7 @@ namespace nuy { namespace graphics {
 	*	@param double xpos					The mouse X coordinate.
 	*	@param double ypos					The mouse Y coordinate.
 	*/
-	static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
+	void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 	{
 		Window* win = (Window*) glfwGetWindowUserPointer(window);
 

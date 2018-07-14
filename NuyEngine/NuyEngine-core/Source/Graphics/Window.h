@@ -18,9 +18,9 @@ namespace nuy { namespace graphics {
 		const char* Title;
 		GLFWwindow* MainWindow;
 
-		static bool Keys[MAX_KEYS]; // indexes are key codes
-		static bool MouseButtons[MAX_MOUSE_BUTTONS];
-		static double MouseX, MouseY;
+		bool Keys[MAX_KEYS]; // indexes are key codes
+		bool MouseButtons[MAX_MOUSE_BUTTONS];
+		double MouseX, MouseY;
 	public:
 		Window(const char* title, int width, int height);
 		~Window();
@@ -32,9 +32,9 @@ namespace nuy { namespace graphics {
 		inline int GetWidth() const { return Width; }
 		inline int GetHeight() const { return Height; }
 
-		static bool IsKeyPressed(unsigned int keyCode);
-		static bool IsMouseButtonPressed(unsigned int buttonCode);
-		static void GetMousePosition(double& xpos, double& ypos);
+		bool IsKeyPressed(unsigned int keyCode) const;
+		bool IsMouseButtonPressed(unsigned int buttonCode) const;
+		void GetMousePosition(double& xpos, double& ypos) const;
 	private:
 		bool Init();
 		
