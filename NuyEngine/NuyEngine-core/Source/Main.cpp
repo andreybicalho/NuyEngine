@@ -14,6 +14,14 @@ int main()
 	while (!window.IsClosed())
 	{
 		window.Clear();
+		if(window.IsKeyPressed(GLFW_KEY_A) || window.IsMouseButtonPressed(GLFW_MOUSE_BUTTON_1))
+		{ 
+			std::cout << "PRESSED!" << std::endl;
+		}
+
+		double x, y;
+		window.GetMousePosition(x, y);
+		std::cout << x << ", " << y << std::endl;
 #if 1
 		glBegin(GL_QUADS);
 		glVertex2f(-0.5f, -0.5f);

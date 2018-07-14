@@ -2,10 +2,16 @@
 
 namespace nuy { namespace graphics {	
 
+	// NOTE(andrey): static members initialization
+	bool Window::Keys[MAX_KEYS]; 
+	bool Window::MouseButtons[MAX_MOUSE_BUTTONS];
+	double Window::MouseX;
+	double Window::MouseY;
+
 	/*
 		Window Resize Callback. Resizes window viewport.
 	*/
-	void windowResize(GLFWwindow *window, int width, int height);
+	void window_resize(GLFWwindow *window, int width, int height);	
 
 	Window::Window(const char* title, int width, int height)
 		: Title(title), Width(width), Height(height)
@@ -14,6 +20,17 @@ namespace nuy { namespace graphics {
 		{
 			glfwTerminate();
 		}
+
+		for (int i = 0; i < MAX_KEYS; i++)
+		{
+			Keys[i] = false;
+		}
+
+		for (int i = 0; i < MAX_MOUSE_BUTTONS; i++)
+		{
+			MouseButtons[i] = false;
+		}
+
 	}
 
 	Window::~Window()
@@ -37,7 +54,11 @@ namespace nuy { namespace graphics {
 		}
 
 		glfwMakeContextCurrent(MainWindow);
-		glfwSetWindowSizeCallback(MainWindow, windowResize);
+		glfwSetWindowSizeCallback(MainWindow, window_resize);
+		glfwSetWindowUserPointer(MainWindow, this);
+		glfwSetKeyCallback(MainWindow, key_callback);
+		glfwSetMouseButtonCallback(MainWindow, mouse_button_callback);
+		glfwSetCursorPosCallback(MainWindow, cursor_position_callback);
 
 		if (glewInit() != GLEW_OK)
 		{
@@ -66,6 +87,34 @@ namespace nuy { namespace graphics {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
+	bool Window::IsKeyPressed(unsigned int keyCode)
+	{
+		// TODO(andrey): log this
+		if(keyCode >= MAX_KEYS)
+		{ 
+			return false;
+		}
+
+		return Keys[keyCode];
+	}
+
+	bool Window::IsMouseButtonPressed(unsigned int buttonCode)
+	{
+		// TODO(andrey): log this
+		if (buttonCode >= MAX_MOUSE_BUTTONS)
+		{
+			return false;
+		}
+
+		return MouseButtons[buttonCode];
+	}
+
+	void Window::GetMousePosition(double& xpos, double& ypos)
+	{
+		xpos = MouseX;
+		ypos = MouseY;
+	}
+
 	/*
 	*	Window Resize Callback. Resizes window viewport.
 	*
@@ -73,9 +122,56 @@ namespace nuy { namespace graphics {
 	*	@param int width					new window width in pixels
 	*	@param int height					new window height in pixels
 	*/
-	void windowResize(GLFWwindow *window, int width, int height)
+	void window_resize(GLFWwindow *window, int width, int height)
 	{
 		glViewport(0, 0, width, height);
+	}
+
+	/*
+	*	The callback to be notified when a physical key, usually the keyboard, is pressed or released or when it repeats.
+	*
+	*	@param GLFWwindow* window			Window where the key was pressed.
+	*	@param int key						The key code.
+	*	@param int scancode					The scancode is unique for every key, regardless of whether it has a key token. Scancodes are platform-specific but consistent over time, so key
+    *										will have different scancodes depending on the platform.
+	*	@param int action					The action is one of GLFW_PRESS, GLFW_REPEAT or GLFW_RELEASE. The key will be GLFW_KEY_UNKNOWN if GLFW lacks a key token for it
+	*	@param int mods						
+	*/
+	void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+	{
+		Window* win = (Window*) glfwGetWindowUserPointer(window);
+		
+		win->Keys[key] = action != GLFW_RELEASE;
+	}
+
+	/*
+	*	The callback to be notified when mouse button is pressed or released or when it repeats.
+	*
+	*	@param GLFWwindow* window			Window where the button was pressed.
+	*	@param int key						The mouse key code.
+	*	@param int action					The action is one of GLFW_PRESS or GLFW_RELEASE.
+	*	@param int mods
+	*/
+	void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+	{
+		Window* win = (Window*) glfwGetWindowUserPointer(window);
+
+		win->MouseButtons[button] = action != GLFW_RELEASE;
+	}
+
+	/*
+	*	The callback to be notified when mouse x and y coordinates are changing in position.
+	*
+	*	@param GLFWwindow* window			Window where the cursor position is over.
+	*	@param double xpos					The mouse X coordinate.
+	*	@param double ypos					The mouse Y coordinate.
+	*/
+	static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
+	{
+		Window* win = (Window*) glfwGetWindowUserPointer(window);
+
+		win->MouseX = xpos;
+		win->MouseY = ypos;
 	}
 
 } }
