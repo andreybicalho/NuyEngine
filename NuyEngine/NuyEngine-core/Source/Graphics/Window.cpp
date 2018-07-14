@@ -1,12 +1,7 @@
 #include "Window.h"
 
 namespace nuy { namespace graphics {	
-
-	/*
-		Window Resize Callback. Resizes window viewport.
-	*/
-	void window_resize(GLFWwindow *window, int width, int height);	
-
+	
 	Window::Window(const char* title, int width, int height)
 		: Title(title), Width(width), Height(height)
 	{

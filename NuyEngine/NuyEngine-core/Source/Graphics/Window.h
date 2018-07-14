@@ -38,6 +38,10 @@ namespace nuy { namespace graphics {
 	private:
 		bool Init();
 		
+		
+		// GLFW callbacks:
+		// Resize viewport callback
+		friend static void window_resize(GLFWwindow *window, int width, int height);
 		// Inputs callbacks
 		friend static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 		friend static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
