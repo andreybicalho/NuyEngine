@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Graphics/Window.h"
+#include "Maths/Vector2.h"
 
 int main()
 {
@@ -11,17 +12,44 @@ int main()
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
+
+	{
+		nuy::maths::Vector2 vec(1.0f, 0.5f);
+		vec.Add(nuy::maths::Vector2(-0.5f, 0.25f));	
+		std::cout << vec << std::endl;	
+	}
+
+	{
+		nuy::maths::Vector2 a(1.0f, 0.0f);
+		nuy::maths::Vector2 b(2.0f, 1.0f);
+		nuy::maths::Vector2 c = a + b;
+		std::cout << c << std::endl;	
+	}
+
+	{
+		nuy::maths::Vector2 a(1.0f, 0.0f);
+		nuy::maths::Vector2 b(2.0f, 1.0f);
+		a += b;
+		std::cout << a << std::endl;
+	}
+
+	{
+		nuy::maths::Vector2 a(1.0f, 0.0f);
+		nuy::maths::Vector2 b(2.0f, 1.0f);
+		std::cout << (a < b) << std::endl;
+		std::cout << (a == b) << std::endl;
+		std::cout << (a != b) << std::endl;
+
+		b = nuy::maths::Vector2(1.0f, 0.0f);
+		std::cout << (a == b) << std::endl;
+		std::cout << (a != b) << std::endl;		
+	}
+
+
+
 	while (!window.IsClosed())
 	{
 		window.Clear();
-		if(window.IsKeyPressed(GLFW_KEY_A) || window.IsMouseButtonPressed(GLFW_MOUSE_BUTTON_1))
-		{ 
-			std::cout << "PRESSED!" << std::endl;
-		}
-
-		double x, y;
-		window.GetMousePosition(x, y);
-		std::cout << x << ", " << y << std::endl;
 #if 1
 		glBegin(GL_QUADS);
 		glVertex2f(-0.5f, -0.5f);
@@ -30,6 +58,14 @@ int main()
 		glVertex2f( 0.5f, -0.5f);
 		glEnd();
 #else
+		if(window.IsKeyPressed(GLFW_KEY_A) || window.IsMouseButtonPressed(GLFW_MOUSE_BUTTON_1))
+		{ 
+			std::cout << "PRESSED!" << std::endl;
+		}
+
+		double x, y;
+		window.GetMousePosition(x, y);
+		std::cout << x << ", " << y << std::endl;
 		glDrawArrays(GL_ARRAY_BUFFER, 0, 6);
 #endif
 
