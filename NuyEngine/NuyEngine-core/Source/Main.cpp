@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "Graphics/Window.h"
-#include "Maths/Vector2.h"
+#include "Maths/Maths.h"
 
 int main()
 {
@@ -34,15 +34,27 @@ int main()
 	}
 
 	{
-		nuy::maths::Vector2 a(1.0f, 0.0f);
-		nuy::maths::Vector2 b(2.0f, 1.0f);
+		nuy::maths::Vector3 a(1.0f, 0.0f, 2.0f);
+		nuy::maths::Vector3 b(2.0f, 1.0f, 3.0f);
 		std::cout << (a < b) << std::endl;
 		std::cout << (a == b) << std::endl;
 		std::cout << (a != b) << std::endl;
 
-		b = nuy::maths::Vector2(1.0f, 0.0f);
-		std::cout << (a == b) << std::endl;
+		b = nuy::maths::Vector3(1.0f, 0.0f, 3.0f);
+		std::cout << a << std::endl << b << std::endl << "a == b ? " << (a == b) << std::endl;
 		std::cout << (a != b) << std::endl;		
+	}
+
+	{
+		nuy::maths::Vector4 a(1.0f, 0.0f, 2.0f, 1.0f);
+		nuy::maths::Vector4 b(2.0f, 1.0f, 3.0f, 1.0);
+		std::cout << (a < b) << std::endl;
+		std::cout << (a == b) << std::endl;
+		std::cout << (a != b) << std::endl;
+
+		b = nuy::maths::Vector4(1.0f, 0.0f, 3.0f, 0.5f);
+		std::cout << a << std::endl << b << std::endl << "a == b ? " << (a == b) << std::endl;
+		std::cout << (a != b) << std::endl;
 	}
 
 

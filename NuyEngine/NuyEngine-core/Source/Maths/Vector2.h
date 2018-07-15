@@ -52,7 +52,8 @@ namespace nuy { namespace maths {
 		bool operator>=(const Vector2& other) const;
 
 		friend std::ostream& operator<<(std::ostream& stream, const Vector2& vector);
-		
+
+		//String ToString() const;
 	};
 
 } }
