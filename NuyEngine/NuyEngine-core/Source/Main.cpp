@@ -54,7 +54,7 @@ int main()
 
 		b = nuy::maths::Vector4(1.0f, 0.0f, 3.0f, 0.5f);
 		std::cout << a << std::endl << b << std::endl << "a == b ? " << (a == b) << std::endl;
-		std::cout << (a != b) << std::endl;
+		std::cout << (a - b) << std::endl;
 	}
 
 

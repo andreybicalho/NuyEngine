@@ -62,7 +62,7 @@ namespace nuy { namespace maths {
 		return Vector3(X / scalar, Y / scalar, Z / scalar);
 	}
 
-	Vector3& Vector3::Add(const Vector3& other)
+	Vector3 Vector3::Add(const Vector3& other)
 	{
 		X += other.X;
 		Y += other.Y;
@@ -71,7 +71,7 @@ namespace nuy { namespace maths {
 		return *this;
 	}
 
-	Vector3& Vector3::Subtract(const Vector3& other)
+	Vector3 Vector3::Subtract(const Vector3& other)
 	{
 		X -= other.X;
 		Y -= other.Y;
@@ -80,7 +80,7 @@ namespace nuy { namespace maths {
 		return *this;
 	}
 
-	Vector3& Vector3::Multiply(const Vector3& other)
+	Vector3 Vector3::Multiply(const Vector3& other)
 	{
 		X *= other.X;
 		Y *= other.Y;
@@ -89,7 +89,7 @@ namespace nuy { namespace maths {
 		return *this;
 	}
 
-	Vector3& Vector3::Divide(const Vector3& other)
+	Vector3 Vector3::Divide(const Vector3& other)
 	{
 		X /= other.X;
 		Y /= other.Y;
@@ -98,7 +98,7 @@ namespace nuy { namespace maths {
 		return *this;
 	}
 
-	Vector3& Vector3::operator+=(const float scalar)
+	Vector3 Vector3::operator+=(const float scalar)
 	{
 		X += scalar;
 		Y += scalar;
@@ -107,7 +107,7 @@ namespace nuy { namespace maths {
 		return *this;
 	}
 
-	Vector3& Vector3::operator-=(const float scalar)
+	Vector3 Vector3::operator-=(const float scalar)
 	{
 		X -= scalar;
 		Y -= scalar;
@@ -116,7 +116,7 @@ namespace nuy { namespace maths {
 		return *this;
 	}
 
-	Vector3& Vector3::operator*=(const float scalar)
+	Vector3 Vector3::operator*=(const float scalar)
 	{
 		X *= scalar;
 		Y *= scalar;
@@ -125,7 +125,7 @@ namespace nuy { namespace maths {
 		return *this;
 	}
 
-	Vector3& Vector3::operator/=(const float scalar)
+	Vector3 Vector3::operator/=(const float scalar)
 	{
 		X /= scalar;
 		Y /= scalar;
@@ -134,24 +134,22 @@ namespace nuy { namespace maths {
 		return *this;
 	}
 
-	// NOTE(andrey): returning reference is faster... but will the compile optimize it anyway if we don't?
-	// Will we need copy?
-	Vector3& Vector3::operator+=(const Vector3& other)
+	Vector3 Vector3::operator+=(const Vector3& other)
 	{
 		return Add(other);
 	}
 
-	Vector3& Vector3::operator-=(const Vector3& other)
+	Vector3 Vector3::operator-=(const Vector3& other)
 	{
 		return Subtract(other);
 	}
 
-	Vector3& Vector3::operator*=(const Vector3& other)
+	Vector3 Vector3::operator*=(const Vector3& other)
 	{
 		return Multiply(other);
 	}
 
-	Vector3& Vector3::operator/=(const Vector3& other)
+	Vector3 Vector3::operator/=(const Vector3& other)
 	{
 		return Divide(other);
 	}

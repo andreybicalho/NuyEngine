@@ -28,20 +28,20 @@ namespace nuy { namespace maths {
 		Vector4 operator*(const float scalar) const;
 		Vector4 operator/(const float scalar) const;
 
-		Vector4& Add(const Vector4& other);
-		Vector4& Subtract(const Vector4& other);
-		Vector4& Multiply(const Vector4& other);
-		Vector4& Divide(const Vector4& other);
+		Vector4 Add(const Vector4& other);
+		Vector4 Subtract(const Vector4& other);
+		Vector4 Multiply(const Vector4& other);
+		Vector4 Divide(const Vector4& other);
 		
-		Vector4& operator+=(const Vector4& other);
-		Vector4& operator-=(const Vector4& other);
-		Vector4& operator*=(const Vector4& other);
-		Vector4& operator/=(const Vector4& other);
+		Vector4 operator+=(const Vector4& other);
+		Vector4 operator-=(const Vector4& other);
+		Vector4 operator*=(const Vector4& other);
+		Vector4 operator/=(const Vector4& other);
 
-		Vector4& operator+=(const float scalar);
-		Vector4& operator-=(const float scalar);
-		Vector4& operator*=(const float scalar);
-		Vector4& operator/=(const float scalar);
+		Vector4 operator+=(const float scalar);
+		Vector4 operator-=(const float scalar);
+		Vector4 operator*=(const float scalar);
+		Vector4 operator/=(const float scalar);
 
 		bool operator==(const Vector4& other) const;
 		bool operator!=(const Vector4& other) const;
