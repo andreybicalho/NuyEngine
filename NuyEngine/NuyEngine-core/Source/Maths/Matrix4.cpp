@@ -1,5 +1,5 @@
 #include "Matrix4.h"
-#include "Maths.h"
+#include "MathFunctions.h"
 
 #include <iomanip>
 

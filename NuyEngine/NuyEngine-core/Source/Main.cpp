@@ -12,19 +12,6 @@ int main()
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
-
-	{
-		nuy::maths::Vector4 a(1.0f, 0.0f, 2.0f, 1.0f);
-		nuy::maths::Vector4 b(2.0f, 1.0f, 3.0f, 1.0);
-		std::cout << (a < b) << std::endl;
-		std::cout << (a == b) << std::endl;
-		std::cout << (a != b) << std::endl;
-
-		b = nuy::maths::Vector4(1.0f, 0.0f, 3.0f, 0.5f);
-		std::cout << a << std::endl << b << std::endl << "a == b ? " << (a == b) << std::endl;
-		std::cout << (a - b) << std::endl;
-	}
-
 	{
 		nuy::maths::Matrix4 position(1.f);
 			
