@@ -14,38 +14,6 @@ int main()
 
 
 	{
-		nuy::maths::Vector2 vec(1.0f, 0.5f);
-		vec.Add(nuy::maths::Vector2(-0.5f, 0.25f));	
-		std::cout << vec << std::endl;	
-	}
-
-	{
-		nuy::maths::Vector2 a(1.0f, 0.0f);
-		nuy::maths::Vector2 b(2.0f, 1.0f);
-		nuy::maths::Vector2 c = a + b;
-		std::cout << c << std::endl;	
-	}
-
-	{
-		nuy::maths::Vector2 a(1.0f, 0.0f);
-		nuy::maths::Vector2 b(2.0f, 1.0f);
-		a += b;
-		std::cout << a << std::endl;
-	}
-
-	{
-		nuy::maths::Vector3 a(1.0f, 0.0f, 2.0f);
-		nuy::maths::Vector3 b(2.0f, 1.0f, 3.0f);
-		std::cout << (a < b) << std::endl;
-		std::cout << (a == b) << std::endl;
-		std::cout << (a != b) << std::endl;
-
-		b = nuy::maths::Vector3(1.0f, 0.0f, 3.0f);
-		std::cout << a << std::endl << b << std::endl << "a == b ? " << (a == b) << std::endl;
-		std::cout << (a != b) << std::endl;		
-	}
-
-	{
 		nuy::maths::Vector4 a(1.0f, 0.0f, 2.0f, 1.0f);
 		nuy::maths::Vector4 b(2.0f, 1.0f, 3.0f, 1.0);
 		std::cout << (a < b) << std::endl;
@@ -55,6 +23,22 @@ int main()
 		b = nuy::maths::Vector4(1.0f, 0.0f, 3.0f, 0.5f);
 		std::cout << a << std::endl << b << std::endl << "a == b ? " << (a == b) << std::endl;
 		std::cout << (a - b) << std::endl;
+	}
+
+	{
+		nuy::maths::Matrix4 position(1.f);
+			
+		position.elements[1 + 2 * 4] = 9999;
+
+		std::cout << position << std::endl;
+
+		position = nuy::maths::Matrix4::Translate(nuy::maths::Vector3(20, 300, 4));
+
+		std::cout << position << std::endl;
+
+		position *= nuy::maths::Matrix4::Identity();
+
+		std::cout << position << std::endl;
 	}
 
 

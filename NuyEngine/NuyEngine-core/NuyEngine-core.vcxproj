@@ -143,13 +143,16 @@
   <ItemGroup>
     <ClCompile Include="Source\Graphics\Window.cpp" />
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Maths\Matrix4.cpp" />
     <ClCompile Include="Source\Maths\Vector2.cpp" />
     <ClCompile Include="Source\Maths\Vector3.cpp" />
     <ClCompile Include="Source\Maths\Vector4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Graphics\Window.h" />
+    <ClInclude Include="Source\Maths\MathFunctions.h" />
     <ClInclude Include="Source\Maths\Maths.h" />
+    <ClInclude Include="Source\Maths\Matrix4.h" />
     <ClInclude Include="Source\Maths\Vector2.h" />
     <ClInclude Include="Source\Maths\Vector3.h" />
     <ClInclude Include="Source\Maths\Vector4.h" />
