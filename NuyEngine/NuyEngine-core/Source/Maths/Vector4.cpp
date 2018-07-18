@@ -6,11 +6,6 @@ namespace nuy { namespace maths {
 	const Vector4 Vector4::ZeroVector(0.0f, 0.0f, 0.0f, 0.0f);
 	const Vector4 Vector4::UnitVector(1.0f, 1.0f, 1.0f, 1.0f);
 
-	Vector4::Vector4()
-		: X(0.0f), Y(0.0f), Z(0.0f), W(0.0f)
-	{
-	}
-
 	Vector4::Vector4(float scalar)
 		: X(scalar), Y(scalar), Z(scalar), W(scalar)
 	{

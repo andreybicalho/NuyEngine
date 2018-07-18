@@ -26,7 +26,14 @@ int main()
 		position *= nuy::maths::Matrix4::Identity();
 
 		std::cout << position << std::endl;
+
+		nuy::maths::Vector4& vec = position.columns[3];
+
+		std::cout << &position.elements[12] << " = " << position.elements[12] << std::endl;
+		std::cout << &position.columns[3].X << " = " << position.columns[3].X << std::endl;
+		std::cout << &vec.X << " = " << vec.X << std::endl;
 	}
+
 
 
 

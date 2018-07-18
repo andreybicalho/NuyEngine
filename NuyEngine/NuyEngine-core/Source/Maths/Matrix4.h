@@ -1,14 +1,20 @@
 #pragma once
 
 #include "Vector3.h"
+#include "Vector4.h"
 
 namespace nuy { namespace maths {
 
 	struct Matrix4
 	{
-		// NOTE(andrey): Use elements in Column Major Ordering (OpenGL is also this way).
-		//				 elements[row + col * 4]
-		float elements[4 * 4];
+		/* NOTE(andrey): Use elements in Column Major Ordering (OpenGL is also this way).
+		*				 elements[row + col * 4]
+		*/
+		union
+		{
+			float elements[4 * 4];
+			Vector4 columns[4];
+		};
 
 		Matrix4();
 		Matrix4(float diagonal);
