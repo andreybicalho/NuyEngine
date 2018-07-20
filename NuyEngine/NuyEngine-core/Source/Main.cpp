@@ -12,23 +12,24 @@ int main()
 
 	GLfloat vertices[] =
 	{
-		-0.5f, -0.5f, 0.0f,
-		-0.5f,  0.5f, 0.0f,
-		 0.5f,  0.5f, 0.0f,
-		 0.5f,  0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f,
-		-0.5f, -0.5f, 0.0f
+	   /* X      Y     Z */
+		 0.0f,  1.0f, 0.0f, // --> upper point of the triangle
+		-1.0f, -1.0f, 0.0f, // --> left bottom point of the triangle
+		 1.0f, -1.0f, 0.0f //  --> right bottom point of the triangle
 	};
 
 	GLuint vbo; 
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3 /* 3 components per vertex*/, GL_FLOAT, GL_FALSE, 0, 0);
+	glVertexAttribPointer(0, 3 /* 3 components per vertex (X, Y, Z)*/, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(0);
+
+	nuy::maths::Matrix4 ortho = nuy::maths::Matrix4::Orthographic(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
 
 	nuy::graphics::Shader shader("Source/Resources/vertexShader.shader", "Source/Resources/fragmentShader.shader");
 	shader.Enable();
+	glUniformMatrix4fv(glGetUniformLocation(shader.ShaderID, "pr_matrix"), 1, GL_FALSE, ortho.elements);
 
 
 	while (!window.IsClosed())

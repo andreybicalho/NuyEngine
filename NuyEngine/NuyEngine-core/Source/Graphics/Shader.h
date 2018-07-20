@@ -7,11 +7,11 @@ namespace nuy { namespace graphics {
 	class Shader
 	{
 	private:
-		GLuint ShaderID;
 		const char* VertexPath;
 		const char* FragmentPath;
 
 	public:
+		GLuint ShaderID;
 		Shader(const char* vertexPath, const char* fragmentPath);
 		~Shader();
 
