@@ -7,6 +7,7 @@
     <ClCompile Include="Source\Maths\Vector3.cpp" />
     <ClCompile Include="Source\Maths\Vector4.cpp" />
     <ClCompile Include="Source\Maths\Matrix4.cpp" />
+    <ClCompile Include="Source\Graphics\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Graphics\Window.h" />
@@ -16,5 +17,11 @@
     <ClInclude Include="Source\Maths\Vector4.h" />
     <ClInclude Include="Source\Maths\Matrix4.h" />
     <ClInclude Include="Source\Maths\MathFunctions.h" />
+    <ClInclude Include="Source\Utils\FileUtils.h" />
+    <ClInclude Include="Source\Graphics\Shader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\Resources\vertexShader.shader" />
+    <None Include="Source\Resources\fragmentShader.shader" />
   </ItemGroup>
 </Project>
