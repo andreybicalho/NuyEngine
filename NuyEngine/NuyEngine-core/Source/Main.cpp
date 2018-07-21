@@ -7,7 +7,7 @@
 int main()
 {
 	nuy::graphics::Window window("Nuy Engine", 960, 540);
-	glClearColor(0.2f, 0.3f, 0.8f, 1.0f);
+	//glClearColor(0.2f, 0.3f, 0.8f, 1.0f);
 
 
 	GLfloat vertices[] =
@@ -33,6 +33,8 @@ int main()
 	shader.SetUniformMat4("ml_matrix", nuy::maths::Matrix4::Translate(nuy::maths::Vector3(0.6, 0, 0)));
 	shader.SetUniformMat4("ml_matrix", nuy::maths::Matrix4::Rotate(45.0f, nuy::maths::Vector3(0, 0, 1)));
 
+	shader.SetUniform2f("light_pos", nuy::maths::Vector2(0.1f, 0.4f));
+	shader.SetUniform4f("colour", nuy::maths::Vector4(0.2f, 0.1f, 0.0f, 1.0f));
 
 	while (!window.IsClosed())
 	{
