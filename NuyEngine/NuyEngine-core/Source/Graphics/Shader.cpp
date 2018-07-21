@@ -19,6 +19,36 @@ namespace nuy { namespace graphics {
 		glDeleteProgram(ShaderID);
 	}
 
+	void Shader::SetUniform1i(const char* name, int value)
+	{
+		glUniform1i(GetUniformLocation(name), value);
+	}
+	
+	void Shader::SetUniform1f(const char* name, float value)
+	{
+		glUniform1f(GetUniformLocation(name), value);
+	}
+
+	void Shader::SetUniform2f(const char* name, const nuy::maths::Vector2& vector)
+	{
+		glUniform2f(GetUniformLocation(name), vector.X, vector.Y);
+	}
+
+	void Shader::SetUniform3f(const char* name, const nuy::maths::Vector3& vector)
+	{
+		glUniform3f(GetUniformLocation(name), vector.X, vector.Y, vector.Z);
+	}
+
+	void Shader::SetUniform4f(const char* name, const nuy::maths::Vector4& vector)
+	{
+		glUniform4f(GetUniformLocation(name), vector.X, vector.Y, vector.Z, vector.W);
+	}
+
+	void Shader::SetUniformMat4(const char * name, const nuy::maths::Matrix4& matrix)
+	{
+		glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, matrix.elements);
+	}
+
 	void Shader::Enable() const
 	{
 		glUseProgram(ShaderID);
@@ -85,6 +115,11 @@ namespace nuy { namespace graphics {
 		glDeleteShader(fragmentId);
 
 		return programId;
+	}
+
+	GLint Shader::GetUniformLocation(const GLchar* name)
+	{
+		return glGetUniformLocation(ShaderID, name);
 	}
 
 } }

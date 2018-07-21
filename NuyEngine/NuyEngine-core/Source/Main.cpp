@@ -13,9 +13,9 @@ int main()
 	GLfloat vertices[] =
 	{
 	   /* X      Y     Z */
-		 0.0f,  1.0f, 0.0f, // --> upper point of the triangle
-		-1.0f, -1.0f, 0.0f, // --> left bottom point of the triangle
-		 1.0f, -1.0f, 0.0f //  --> right bottom point of the triangle
+		 0.0f,  1.0f, 0.0f,
+		-1.0f, -1.0f, 0.0f,
+		 1.0f, -1.0f, 0.0f
 	};
 
 	GLuint vbo; 
@@ -29,7 +29,7 @@ int main()
 
 	nuy::graphics::Shader shader("Source/Resources/vertexShader.shader", "Source/Resources/fragmentShader.shader");
 	shader.Enable();
-	glUniformMatrix4fv(glGetUniformLocation(shader.ShaderID, "pr_matrix"), 1, GL_FALSE, ortho.elements);
+	shader.SetUniformMat4("pr_matrix", ortho);
 
 
 	while (!window.IsClosed())
