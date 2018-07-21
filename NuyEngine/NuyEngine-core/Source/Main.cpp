@@ -13,9 +13,9 @@ int main()
 	GLfloat vertices[] =
 	{
 	   /* X      Y     Z */
-		 0.0f,  1.0f, 0.0f,
-		-1.0f, -1.0f, 0.0f,
-		 1.0f, -1.0f, 0.0f
+		 0.0f,  0.5f, 0.0f,
+		-0.5f, -0.5f, 0.0f,
+		 0.5f, -0.5f, 0.0f
 	};
 
 	GLuint vbo; 
@@ -30,6 +30,8 @@ int main()
 	nuy::graphics::Shader shader("Source/Resources/vertexShader.shader", "Source/Resources/fragmentShader.shader");
 	shader.Enable();
 	shader.SetUniformMat4("pr_matrix", ortho);
+	shader.SetUniformMat4("ml_matrix", nuy::maths::Matrix4::Translate(nuy::maths::Vector3(0.6, 0, 0)));
+	shader.SetUniformMat4("ml_matrix", nuy::maths::Matrix4::Rotate(45.0f, nuy::maths::Vector3(0, 0, 1)));
 
 
 	while (!window.IsClosed())
