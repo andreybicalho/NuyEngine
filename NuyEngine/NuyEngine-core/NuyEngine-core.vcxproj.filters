@@ -8,6 +8,9 @@
     <ClCompile Include="Source\Maths\Vector4.cpp" />
     <ClCompile Include="Source\Maths\Matrix4.cpp" />
     <ClCompile Include="Source\Graphics\Shader.cpp" />
+    <ClCompile Include="Source\Graphics\Buffers\Buffer.cpp" />
+    <ClCompile Include="Source\Graphics\Buffers\IndexBuffer.cpp" />
+    <ClCompile Include="Source\Graphics\Buffers\VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Graphics\Window.h" />
@@ -19,6 +22,9 @@
     <ClInclude Include="Source\Maths\MathFunctions.h" />
     <ClInclude Include="Source\Utils\FileUtils.h" />
     <ClInclude Include="Source\Graphics\Shader.h" />
+    <ClInclude Include="Source\Graphics\Buffers\Buffer.h" />
+    <ClInclude Include="Source\Graphics\Buffers\IndexBuffer.h" />
+    <ClInclude Include="Source\Graphics\Buffers\VertexArray.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Resources\vertexShader.shader" />
