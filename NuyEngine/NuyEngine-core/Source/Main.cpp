@@ -32,10 +32,10 @@ int main()
 	GLfloat vertices[] =
 	{
 	   /* X      Y     Z */
-	   -0.5f, -0.5f, 0.0f,
-	    0.5f, -0.5f, 0.0f,
-		0.5f,  0.5f, 0.0f,
-	   -0.5f,  0.5f, 0.0f
+	    3.0f,  3.0f, 0.0f,
+	   10.0f,  3.0f, 0.0f,
+	   10.0f,  5.0f, 0.0f,
+	    3.0f,  5.0f, 0.0f
 	};
 
 	GLushort indices[] = 
@@ -44,12 +44,35 @@ int main()
 		0, 2, 3
 	};
 
-	nuy::graphics::VertexArray vao;
-	nuy::graphics::Buffer* vbo = new nuy::graphics::Buffer(vertices, 4 * 3 /* 4 vertices with 3 components (x,y,z) */, 3 /* 3 components x,y,z*/);
-	nuy::graphics::IndexBuffer ibo(indices, 6 /* our square is made with two triangles, each triangle has 3 vertices, total of 6 vertices*/);
-	vao.AddBuffer(vbo, 0 /*location = 0 in our shader*/);
+	GLfloat colorsA[] = /* colors must be per vertex, one color for each vertex, since we have 4 vertices there must be 4 colors*/
+	{
+	 /* R  G  B  A */
+		1, 0, 1, 1,
+		1, 0, 1, 1,
+		1, 0, 1, 1,
+		1, 0, 1, 1
+	};
+
+	GLfloat colorsB[] =
+	{
+	 /*  R     G     B     A */
+		0.2f, 0.3f, 0.8f, 1.0f,
+		0.2f, 0.3f, 0.8f, 1.0f,
+		0.2f, 0.3f, 0.8f, 1.0f,
+		0.2f, 0.3f, 0.8f, 1.0f
+	};
+
+
+	nuy::graphics::VertexArray sprint1, sprint2;
+	nuy::graphics::IndexBuffer ibo(indices, 6);
+
+	sprint1.AddBuffer(new nuy::graphics::Buffer(vertices, 4 * 3, 3), 0);
+	sprint1.AddBuffer(new nuy::graphics::Buffer(colorsA, 4 * 4, 4), 1);
+
+	sprint2.AddBuffer(new nuy::graphics::Buffer(vertices, 4 * 3, 3), 0);
+	sprint2.AddBuffer(new nuy::graphics::Buffer(colorsB, 4 * 4, 4), 1);
 #endif
-	nuy::maths::Matrix4 ortho = nuy::maths::Matrix4::Orthographic(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
+	nuy::maths::Matrix4 ortho = nuy::maths::Matrix4::Orthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f); // 16x9 space hence 16:9 aspect ratio
 
 	nuy::graphics::Shader shader("Source/Resources/vertexShader.shader", "Source/Resources/fragmentShader.shader");
 	shader.Enable();
@@ -65,18 +88,25 @@ int main()
 		window.Clear();
 		double x, y;
 		window.GetMousePosition(x, y);
-		x = (x / 960.0f - 0.5f);
-		y = (0.5f - y / 540.0f);
-		//std::cout << x << ", " << y << std::endl;
-		shader.SetUniform2f("in_light_pos", nuy::maths::Vector2((float)x, (float)y));
+		shader.SetUniform2f("in_light_pos", nuy::maths::Vector2((float)(x * 16.0f / 960.0f), (float)(9.0f - y * 9.0f / 540.0f)));
+		std::cout << x << ", " << y << std::endl;
 #if 0
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 #else
-		vao.Bind();
+		sprint1.Bind();
 		ibo.Bind();
+		shader.SetUniformMat4("ml_matrix", nuy::maths::Matrix4::Translate(nuy::maths::Vector3(0, 0, 0)));
 		glDrawElements(GL_TRIANGLES, ibo.GetCount(), GL_UNSIGNED_SHORT, 0/*0 because we have already bind our indices*/);
 		ibo.Unbind();
-		vao.Unbind();
+		sprint1.Unbind();
+
+
+		sprint2.Bind();
+		ibo.Bind();
+		shader.SetUniformMat4("ml_matrix", nuy::maths::Matrix4::Translate(nuy::maths::Vector3(-2, 2, 0)));
+		glDrawElements(GL_TRIANGLES, ibo.GetCount(), GL_UNSIGNED_SHORT, 0/*0 because we have already bind our indices*/);
+		ibo.Unbind();
+		sprint2.Unbind();
 #endif
 		window.Update();
 	}
