@@ -96,7 +96,7 @@ int main()
 		sprint1.Bind();
 		ibo.Bind();
 		shader.SetUniformMat4("ml_matrix", nuy::maths::Matrix4::Translate(nuy::maths::Vector3(0, 0, 0)));
-		glDrawElements(GL_TRIANGLES, ibo.GetCount(), GL_SHORT, 0/*0 because we have already bind our indices*/);
+		glDrawElements(GL_TRIANGLES, ibo.GetCount(), GL_UNSIGNED_SHORT, 0/*0 because we have already bind our indices*/);
 		ibo.Unbind();
 		sprint1.Unbind();
 
