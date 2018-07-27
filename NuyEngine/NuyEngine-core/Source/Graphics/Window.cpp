@@ -61,9 +61,14 @@ namespace nuy { namespace graphics {
 
 	void Window::Update()
 	{
-		glfwSwapBuffers(MainWindow);
+		GLenum error = glGetError();
+		if (error != GL_NO_ERROR)
+		{
+			std::cout << "OpenGL Error: " << error << std::endl;
+		}
 				
 		glfwPollEvents();
+		glfwSwapBuffers(MainWindow);
 	}
 
 	bool Window::IsClosed() const

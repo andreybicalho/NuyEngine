@@ -89,14 +89,14 @@ int main()
 		double x, y;
 		window.GetMousePosition(x, y);
 		shader.SetUniform2f("in_light_pos", nuy::maths::Vector2((float)(x * 16.0f / 960.0f), (float)(9.0f - y * 9.0f / 540.0f)));
-		std::cout << x << ", " << y << std::endl;
+		//std::cout << x << ", " << y << std::endl;
 #if 0
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 #else
 		sprint1.Bind();
 		ibo.Bind();
 		shader.SetUniformMat4("ml_matrix", nuy::maths::Matrix4::Translate(nuy::maths::Vector3(0, 0, 0)));
-		glDrawElements(GL_TRIANGLES, ibo.GetCount(), GL_UNSIGNED_SHORT, 0/*0 because we have already bind our indices*/);
+		glDrawElements(GL_TRIANGLES, ibo.GetCount(), GL_SHORT, 0/*0 because we have already bind our indices*/);
 		ibo.Unbind();
 		sprint1.Unbind();
 
