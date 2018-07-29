@@ -7,7 +7,7 @@ namespace nuy { namespace maths {
 	struct Vector4
 	{
 		float X, Y, Z, W;
-
+		
 		Vector4() = default;
 		Vector4(float scalar);
 		Vector4(float x, float y, float z, float w);

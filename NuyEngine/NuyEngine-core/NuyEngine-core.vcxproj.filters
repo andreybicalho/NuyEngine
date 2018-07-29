@@ -11,6 +11,7 @@
     <ClCompile Include="Source\Graphics\Buffers\Buffer.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\IndexBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\VertexArray.cpp" />
+    <ClCompile Include="Source\Graphics\Simple2DRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Graphics\Window.h" />
@@ -25,6 +26,9 @@
     <ClInclude Include="Source\Graphics\Buffers\Buffer.h" />
     <ClInclude Include="Source\Graphics\Buffers\IndexBuffer.h" />
     <ClInclude Include="Source\Graphics\Buffers\VertexArray.h" />
+    <ClInclude Include="Source\Graphics\Renderable2D.h" />
+    <ClInclude Include="Source\Graphics\Renderer2D.h" />
+    <ClInclude Include="Source\Graphics\Simple2DRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Resources\vertexShader.shader" />
