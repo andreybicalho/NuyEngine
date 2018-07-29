@@ -47,18 +47,18 @@ int main()
 	GLfloat colorsA[] = /* colors must be per vertex, one color for each vertex, since we have 4 vertices there must be 4 colors*/
 	{
 	 /* R  G  B  A */
-		1, 0, 1, 1,
-		1, 0, 1, 1,
-		1, 0, 1, 1,
+		1, 0, 0, 1,
+		0, 1, 0, 1,
+		0, 0, 1, 1,
 		1, 0, 1, 1
 	};
 
 	GLfloat colorsB[] =
 	{
 	 /*  R     G     B     A */
+		0.2f, 0.8f, 0.8f, 1.0f,
 		0.2f, 0.3f, 0.8f, 1.0f,
-		0.2f, 0.3f, 0.8f, 1.0f,
-		0.2f, 0.3f, 0.8f, 1.0f,
+		0.8f, 0.3f, 0.8f, 1.0f,
 		0.2f, 0.3f, 0.8f, 1.0f
 	};
 
@@ -103,7 +103,7 @@ int main()
 
 		sprint2.Bind();
 		ibo.Bind();
-		shader.SetUniformMat4("ml_matrix", nuy::maths::Matrix4::Translate(nuy::maths::Vector3(-2, 2, 0)));
+		shader.SetUniformMat4("ml_matrix", nuy::maths::Matrix4::Translate(nuy::maths::Vector3(-1, 2, 0)));
 		glDrawElements(GL_TRIANGLES, ibo.GetCount(), GL_UNSIGNED_SHORT, 0/*0 because we have already bind our indices*/);
 		ibo.Unbind();
 		sprint2.Unbind();
