@@ -21,6 +21,7 @@ int main()
 	shader.SetUniformMat4("pr_matrix", ortho);
 
 	nuy::graphics::Renderable2D sprite(nuy::maths::Vector3(3, 3, 0), nuy::maths::Vector2(4, 4), nuy::maths::Vector4(1, 0, 1, 1), shader);
+	nuy::graphics::Renderable2D sprite2(nuy::maths::Vector3(1, 1, 0), nuy::maths::Vector2(2, 3), nuy::maths::Vector4(0.2f, 0, 1, 1), shader);
 	nuy::graphics::Simple2DRenderer renderer;
 
 	shader.SetUniform2f("in_light_pos", nuy::maths::Vector2(0.0f, 0.0f));
@@ -35,6 +36,7 @@ int main()
 		//std::cout << x << ", " << y << std::endl;
 
 		renderer.Submit(&sprite);
+		renderer.Submit(&sprite2);
 		renderer.Flush();
 
 		window.Update();
