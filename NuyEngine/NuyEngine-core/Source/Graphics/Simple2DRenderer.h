@@ -12,7 +12,7 @@ namespace nuy {	namespace graphics {
 		std::deque<const Renderable2D*> RenderQueue;
 	public:
 		void Submit(const Renderable2D* renderable) override;
-		void Flush() override;
+		void Draw() override;
 	};
 
 } }

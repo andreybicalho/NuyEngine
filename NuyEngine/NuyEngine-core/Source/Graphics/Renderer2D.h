@@ -11,7 +11,7 @@ namespace nuy {	namespace graphics {
 	{
 	protected:
 		virtual void Submit(const Renderable2D* renderable) = 0;
-		virtual void Flush() = 0;
+		virtual void Draw() = 0;
 	};
 
 } }

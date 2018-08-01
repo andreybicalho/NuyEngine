@@ -37,7 +37,7 @@ int main()
 
 		renderer.Submit(&sprite);
 		renderer.Submit(&sprite2);
-		renderer.Flush();
+		renderer.Draw();
 
 		window.Update();
 	}

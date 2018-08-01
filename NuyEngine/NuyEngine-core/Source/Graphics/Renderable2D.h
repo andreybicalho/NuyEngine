@@ -36,14 +36,6 @@ namespace nuy {	namespace graphics {
 				size.X, 0,      0
 			};
 
-			/*GLfloat colors[] =
-			{
-				color.R, color.G, color.B, color.A,
-				color.R, color.G, color.B, color.A,
-				color.R, color.G, color.B, color.A,
-				color.R, color.G, color.B, color.A
-			};*/
-
 			GLfloat colors[] =
 			{
 				color.X, color.Y, color.Z, color.W,

@@ -9,7 +9,7 @@ namespace nuy {	namespace graphics {
 		RenderQueue.push_back(renderable);
 	}
 
-	void Simple2DRenderer::Flush()
+	void Simple2DRenderer::Draw()
 	{
 		while(!RenderQueue.empty())
 		{
