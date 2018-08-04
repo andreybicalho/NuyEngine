@@ -29,7 +29,7 @@ namespace nuy { namespace graphics {
 		glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)(3 * sizeof(GLfloat)));
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-		GLushort indices[RENDERER_INDICES_SIZE];
+		GLuint* indices = new GLuint[RENDERER_INDICES_SIZE];
 
 		/* 
 		 * NOTE(andrey): building indices for ours rectangles.
@@ -118,7 +118,7 @@ namespace nuy { namespace graphics {
 		glBindVertexArray(VAO_ID);
 		IBO->Bind();
 
-		glDrawElements(GL_TRIANGLES, IndexCount, GL_UNSIGNED_SHORT, NULL);
+		glDrawElements(GL_TRIANGLES, IndexCount, GL_UNSIGNED_INT, NULL);
 
 		IBO->Unbind();
 		glBindVertexArray(0);

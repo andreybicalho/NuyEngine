@@ -31,9 +31,9 @@ int main()
 	std::vector<nuy::graphics::Renderable2D*> sprites;
 	srand(time(NULL));
 
-	for (float y = 0; y < 9.0f; y++)
+	for (float y = 0; y < 9.0f; y +=0.05f)
 	{
-		for (float x = 0; x < 16.0f; x++)
+		for (float x = 0; x < 16.0f; x +=0.05f)
 		{
 			sprites.push_back(new 
 #if BATCH_RENDERER
@@ -41,7 +41,7 @@ int main()
 #else
 				nuy::graphics::StaticSprite
 #endif
-				(x, y, 0.9f, 0.9f, nuy::maths::Vector4(rand() % 1000 / 1000.0f, 0, 1, 1)
+				(x, y, 0.04f, 0.04f, nuy::maths::Vector4(rand() % 1000 / 1000.0f, 0, 1, 1)
 #if !BATCH_RENDERER
 				, shader
 #endif
@@ -82,7 +82,7 @@ int main()
 		renderer.End();
 #endif
 		renderer.Draw();
-
+		printf("Sprites: %d\n", sprites.size());
 		window.Update();
 	}
 
