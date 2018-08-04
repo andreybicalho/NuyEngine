@@ -16,7 +16,7 @@ namespace nuy { namespace graphics {
 
 	void BatchRenderer2D::Init()
 	{
-		glGenBuffers(1, &VAO_ID);
+		glGenVertexArrays(1, &VAO_ID);
 		glGenBuffers(1, &VBO_ID);
 
 		/* NOTE(andrey): Teaching OpenGL how to interpret memory according to our VertexData. */
