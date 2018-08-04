@@ -14,6 +14,8 @@ namespace nuy { namespace graphics {
 		{
 			delete Buffers[i];
 		}
+
+		glDeleteVertexArrays(1, &VertexArrayID);
 	}
 
 	void VertexArray::AddBuffer(Buffer* buffer, GLuint index)

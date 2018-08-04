@@ -2,26 +2,25 @@
 
 namespace nuy {	namespace graphics {
 
-	
-
 	void Simple2DRenderer::Submit(const Renderable2D* renderable)
 	{
-		RenderQueue.push_back(renderable);
+		// TODO(andrey): throw an exception, log it or scream, if this renderable is not a StaticSprite
+		RenderQueue.push_back( (StaticSprite*) renderable);
 	}
 
 	void Simple2DRenderer::Draw()
 	{
 		while(!RenderQueue.empty())
 		{
-			const Renderable2D* renderable = RenderQueue.front();
-			renderable->GetVAO()->Bind();
-			renderable->GetIBO()->Bind();
+			const StaticSprite* staticSprite = RenderQueue.front();
+			staticSprite->GetVAO()->Bind();
+			staticSprite->GetIBO()->Bind();
 
-			renderable->GetShader().SetUniformMat4("ml_matrix", maths::Matrix4::Translate(renderable->GetPosition()));
-			glDrawElements(GL_TRIANGLES, renderable->GetIBO()->GetCount(), GL_UNSIGNED_SHORT, nullptr);
+			staticSprite->GetShader().SetUniformMat4("ml_matrix", maths::Matrix4::Translate(staticSprite->GetPosition()));
+			glDrawElements(GL_TRIANGLES, staticSprite->GetIBO()->GetCount(), GL_UNSIGNED_SHORT, nullptr);
 
-			renderable->GetIBO()->Unbind();
-			renderable->GetVAO()->Unbind();
+			staticSprite->GetIBO()->Unbind();
+			staticSprite->GetVAO()->Unbind();
 
 			RenderQueue.pop_front();
 		}

@@ -11,6 +11,11 @@ namespace nuy { namespace graphics {
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 
+	IndexBuffer::~IndexBuffer()
+	{
+		glDeleteBuffers(1, &IndexBufferID);
+	}
+
 	void IndexBuffer::Bind() const
 	{
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexBufferID);
