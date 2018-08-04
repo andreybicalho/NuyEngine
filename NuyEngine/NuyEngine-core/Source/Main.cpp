@@ -14,6 +14,8 @@
 #include "Graphics/StaticSprite.h"
 #include "Graphics/Sprite.h"
 
+#include <time.h>
+
 #define BATCH_RENDERER 1
 
 int main()
@@ -26,10 +28,33 @@ int main()
 	shader.Enable();
 	shader.SetUniformMat4("pr_matrix", ortho);
 
+	std::vector<nuy::graphics::Renderable2D*> sprites;
+	srand(time(NULL));
+
+	for (float y = 0; y < 9.0f; y++)
+	{
+		for (float x = 0; x < 16.0f; x++)
+		{
+			sprites.push_back(new 
+#if BATCH_RENDERER
+				nuy::graphics::Sprite
+#else
+				nuy::graphics::StaticSprite
+#endif
+				(x, y, 0.9f, 0.9f, nuy::maths::Vector4(rand() % 1000 / 1000.0f, 0, 1, 1)
+#if !BATCH_RENDERER
+				, shader
+#endif
+					));
+		}
+	}
+
+
 #if BATCH_RENDERER
 	nuy::graphics::Sprite sprite(3, 3, 4, 4, nuy::maths::Vector4(1, 0, 1, 1));
 	nuy::graphics::Sprite sprite2(1, 1, 2, 3, nuy::maths::Vector4(0.2f, 0, 1, 1));
 	nuy::graphics::BatchRenderer2D renderer;
+
 #else
 	nuy::graphics::StaticSprite sprite(3, 3, 4, 4, nuy::maths::Vector4(1, 0, 1, 1), shader);
 	nuy::graphics::StaticSprite sprite2(1, 1, 2, 3, nuy::maths::Vector4(0.2f, 0, 1, 1), shader);
@@ -48,8 +73,11 @@ int main()
 #if BATCH_RENDERER
 		renderer.Begin();
 #endif
-		renderer.Submit(&sprite);
-		renderer.Submit(&sprite2);
+		for(int i = 0; i < sprites.size(); i++)
+		{ 
+			renderer.Submit(sprites[i]);
+		}
+
 #if BATCH_RENDERER
 		renderer.End();
 #endif
