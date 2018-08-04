@@ -9,9 +9,12 @@
 
 #include "Graphics/Renderable2D.h"
 #include "Graphics/Simple2DRenderer.h"
+#include "Graphics/BatchRenderer2D.h"
 
 #include "Graphics/StaticSprite.h"
 #include "Graphics/Sprite.h"
+
+#define BATCH_RENDERER 1
 
 int main()
 {
@@ -23,10 +26,15 @@ int main()
 	shader.Enable();
 	shader.SetUniformMat4("pr_matrix", ortho);
 
-	nuy::graphics::StaticSprite staticSprite(3, 3, 4, 4, nuy::maths::Vector4(1, 0, 1, 1), shader);
-	nuy::graphics::StaticSprite staticSprite2(1, 1, 2, 3, nuy::maths::Vector4(0.2f, 0, 1, 1), shader);
+#if BATCH_RENDERER
+	nuy::graphics::Sprite sprite(3, 3, 4, 4, nuy::maths::Vector4(1, 0, 1, 1));
+	nuy::graphics::Sprite sprite2(1, 1, 2, 3, nuy::maths::Vector4(0.2f, 0, 1, 1));
+	nuy::graphics::BatchRenderer2D renderer;
+#else
+	nuy::graphics::StaticSprite sprite(3, 3, 4, 4, nuy::maths::Vector4(1, 0, 1, 1), shader);
+	nuy::graphics::StaticSprite sprite2(1, 1, 2, 3, nuy::maths::Vector4(0.2f, 0, 1, 1), shader);
 	nuy::graphics::Simple2DRenderer renderer;
-
+#endif
 	shader.SetUniform2f("in_light_pos", nuy::maths::Vector2(0.0f, 0.0f));
 	shader.SetUniform4f("in_color", nuy::maths::Vector4(0.2f, 0.1f, 0.0f, 1.0f));
 
@@ -37,9 +45,14 @@ int main()
 		window.GetMousePosition(x, y);
 		shader.SetUniform2f("in_light_pos", nuy::maths::Vector2((float)(x * 16.0f / 960.0f), (float)(9.0f - y * 9.0f / 540.0f)));
 		//std::cout << x << ", " << y << std::endl;
-
-		renderer.Submit(&staticSprite);
-		renderer.Submit(&staticSprite2);
+#if BATCH_RENDERER
+		renderer.Begin();
+#endif
+		renderer.Submit(&sprite);
+		renderer.Submit(&sprite2);
+#if BATCH_RENDERER
+		renderer.End();
+#endif
 		renderer.Draw();
 
 		window.Update();
