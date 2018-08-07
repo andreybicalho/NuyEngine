@@ -48,6 +48,7 @@ namespace nuy { namespace graphics {
 		glfwSetKeyCallback(MainWindow, key_callback);
 		glfwSetMouseButtonCallback(MainWindow, mouse_button_callback);
 		glfwSetCursorPosCallback(MainWindow, cursor_position_callback);
+		glfwSwapInterval(0.0);
 
 		if (glewInit() != GLEW_OK)
 		{

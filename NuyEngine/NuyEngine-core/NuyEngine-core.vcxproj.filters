@@ -35,6 +35,7 @@
     <ClInclude Include="Source\Graphics\BatchRenderer2D.h" />
     <ClInclude Include="Source\Graphics\Sprite.h" />
     <ClInclude Include="Source\Graphics\StaticSprite.h" />
+    <ClInclude Include="Source\Utils\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Resources\vertexShader.shader" />

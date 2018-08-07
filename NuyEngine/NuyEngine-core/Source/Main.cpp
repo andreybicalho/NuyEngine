@@ -14,6 +14,8 @@
 #include "Graphics/StaticSprite.h"
 #include "Graphics/Sprite.h"
 
+#include "Utils/Timer.h"
+
 #include <time.h>
 
 #define BATCH_RENDERER 1
@@ -63,6 +65,10 @@ int main()
 	shader.SetUniform2f("in_light_pos", nuy::maths::Vector2(0.0f, 0.0f));
 	shader.SetUniform4f("in_color", nuy::maths::Vector4(0.2f, 0.1f, 0.0f, 1.0f));
 
+
+	nuy::Timer timer;
+	float time = 0.0f;
+	unsigned int framesPerSecond = 0;;
 	while (!window.IsClosed())
 	{
 		window.Clear();
@@ -82,8 +88,17 @@ int main()
 		renderer.End();
 #endif
 		renderer.Draw();
-		printf("Sprites: %d\n", sprites.size());
 		window.Update();
+		framesPerSecond++;
+
+		//printf("%d sprites in %f ms\n", sprites.size(), timer.Elapsed() * 1000.0f); // NOTE(andrey): prints time in milliseconds (needs to reset timer in the main loop)
+		if((timer.Elapsed() - time) > 1.0f)
+		{ 
+			time += 1.0f;
+			printf("%d fps\n", framesPerSecond);
+			framesPerSecond = 0;
+		}
+
 	}
 
 
