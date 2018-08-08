@@ -71,6 +71,11 @@ int main()
 	unsigned int framesPerSecond = 0;;
 	while (!window.IsClosed())
 	{
+		nuy::maths::Matrix4 mat = nuy::maths::Matrix4::Translate(nuy::maths::Vector3(5, 5, 5));
+		mat = mat * nuy::maths::Matrix4::Rotate(timer.Elapsed() * 100.f, nuy::maths::Vector3(0, 0, 1));
+		mat = mat * nuy::maths::Matrix4::Translate(nuy::maths::Vector3(-5, -5, -5));
+		shader.SetUniformMat4("ml_matrix", mat);
+
 		window.Clear();
 		double x, y;
 		window.GetMousePosition(x, y);
