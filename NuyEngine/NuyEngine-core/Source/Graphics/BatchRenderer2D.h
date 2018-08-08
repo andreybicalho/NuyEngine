@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstddef>
+
 #include "Renderer2D.h"
 #include "Buffers/VertexArray.h"
 #include "Buffers/IndexBuffer.h"

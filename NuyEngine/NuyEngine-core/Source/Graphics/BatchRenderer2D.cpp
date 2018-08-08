@@ -26,7 +26,7 @@ namespace nuy { namespace graphics {
 		glEnableVertexAttribArray(SHADER_VERTEX_INDEX);
 		glEnableVertexAttribArray(SHADER_COLOR_INDEX);
 		glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*) 0);
-		glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)(3 * sizeof(GLfloat)));
+		glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (const GLvoid*)(offsetof(VertexData, VertexData::color)));
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 		GLuint* indices = new GLuint[RENDERER_INDICES_SIZE];
@@ -83,23 +83,30 @@ namespace nuy { namespace graphics {
 		const maths::Vector4& color = renderable->GetColor();
 		const maths::Vector2& size = renderable->GetSize();
 
+		int r = color.X * 255.0f;
+		int g = color.Y * 255.0f;
+		int b = color.Z * 255.0f;
+		int a = color.W * 255.0f;
+
+		unsigned int colorBytes = a << 24 | b << 16 | g << 8 | r;
+
 		_Buffer->vertex = position;
-		_Buffer->color = color;
+		_Buffer->color = colorBytes;
 		_Buffer++; // advancing in memory
 
 		// second vertex
 		_Buffer->vertex = maths::Vector3(position.X, position.Y + size.Y, position.Z);
-		_Buffer->color = color;
+		_Buffer->color = colorBytes;
 		_Buffer++;
 
 		// third vertex
 		_Buffer->vertex = maths::Vector3(position.X + size.X, position.Y + size.Y, position.Z);
-		_Buffer->color = color;
+		_Buffer->color = colorBytes;
 		_Buffer++;
 
 		// fourth vertex
 		_Buffer->vertex = maths::Vector3(position.X + size.X, position.Y, position.Z);
-		_Buffer->color = color;
+		_Buffer->color = colorBytes;
 		_Buffer++; // FIX(andrey): should we advance it once more since we have only 4 vertices?
 
 		// NOTE(andrey): again, a rectangle is made up of 4 vertices, which have two triangles, and a triangle is made up of 3 vertices (elements), 
