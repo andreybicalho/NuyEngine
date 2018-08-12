@@ -29,9 +29,9 @@ namespace nuy { namespace graphics {
 		BatchRenderer2D();
 		~BatchRenderer2D();
 
-		void Begin();
+		void Begin() override;
 		void Submit(const Renderable2D* renderable) override;
-		void End();
+		void End() override;
 		void Draw() override;
 	private:
 		void Init();

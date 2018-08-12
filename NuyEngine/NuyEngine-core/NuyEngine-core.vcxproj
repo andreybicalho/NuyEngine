@@ -151,6 +151,8 @@
     <ClCompile Include="Source\Graphics\Buffers\Buffer.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\IndexBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\VertexArray.cpp" />
+    <ClCompile Include="Source\Graphics\Layers\Layer.cpp" />
+    <ClCompile Include="Source\Graphics\Layers\TileLayer.cpp" />
     <ClCompile Include="Source\Graphics\Simple2DRenderer.cpp" />
     <ClCompile Include="Source\Graphics\Shader.cpp" />
     <ClCompile Include="Source\Graphics\Sprite.cpp" />
@@ -167,6 +169,8 @@
     <ClInclude Include="Source\Graphics\Buffers\Buffer.h" />
     <ClInclude Include="Source\Graphics\Buffers\IndexBuffer.h" />
     <ClInclude Include="Source\Graphics\Buffers\VertexArray.h" />
+    <ClInclude Include="Source\Graphics\Layers\Layer.h" />
+    <ClInclude Include="Source\Graphics\Layers\TileLayer.h" />
     <ClInclude Include="Source\Graphics\Renderable2D.h" />
     <ClInclude Include="Source\Graphics\Renderer2D.h" />
     <ClInclude Include="Source\Graphics\Shader.h" />

@@ -9,8 +9,10 @@ namespace nuy {	namespace graphics {
 
 	class Renderer2D
 	{
-	protected:
+	public:
+		virtual void Begin() {}
 		virtual void Submit(const Renderable2D* renderable) = 0;
+		virtual void End() {}
 		virtual void Draw() = 0;
 	};
 
