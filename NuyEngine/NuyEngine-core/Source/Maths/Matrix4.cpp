@@ -35,6 +35,16 @@ namespace nuy { namespace maths {
 		return left.Multiply(right);
 	}
 
+	Vector3 operator*(const Matrix4& left, const Vector3& right)
+	{
+		return left.Multiply(right);
+	}
+
+	Vector4 operator*(const Matrix4& left, const Vector4& right)
+	{
+		return left.Multiply(right);
+	}
+
 	Matrix4& Matrix4::operator*=(const Matrix4& other)
 	{
 		return Multiply(other);
@@ -58,6 +68,25 @@ namespace nuy { namespace maths {
 
 		memcpy(elements, data, 4 * 4 * sizeof(float));
 		return *this;
+	}
+
+	Vector3 Matrix4::Multiply(const Vector3& other) const
+	{
+		return Vector3(
+			columns[0].X * other.X + columns[1].X * other.Y + columns[2].X * other.Z,
+			columns[0].Y * other.X + columns[1].Y * other.Y + columns[2].Y * other.Z,
+			columns[0].Z * other.X + columns[1].Z * other.Y + columns[2].Z * other.Z
+		);
+	}
+
+	Vector4 Matrix4::Multiply(const Vector4& other) const
+	{
+		return Vector4(
+			columns[0].X * other.X + columns[1].X * other.Y + columns[2].X * other.Z + columns[3].X * other.W,
+			columns[0].Y * other.X + columns[1].Y * other.Y + columns[2].Y * other.Z + columns[3].Y * other.W,
+			columns[0].Z * other.X + columns[1].Z * other.Y + columns[2].Z * other.Z + columns[3].Z * other.W,
+			columns[0].W * other.X + columns[1].W * other.Y + columns[2].W * other.Z + columns[3].W * other.W
+		);
 	}
 
 	Matrix4 Matrix4::Orthographic(float left, float right, float bottom, float top, float near, float far)

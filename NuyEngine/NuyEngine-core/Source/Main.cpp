@@ -20,7 +20,7 @@
 
 #include "Graphics/Layers/TileLayer.h"
 
-#define BATCH_RENDERER 1
+#define TEST_50K_SPRITES 0
 
 int main()
 {
@@ -40,6 +40,7 @@ int main()
 
 
 	nuy::graphics::TileLayer layer(&shader);
+#if TEST_50K_SPRITES
 	for (float y = -9.0f; y < 9.0f; y += 0.1f)
 	{
 		for (float x = -16.0f; x < 16.0f; x += 0.1f)
@@ -47,6 +48,15 @@ int main()
 			layer.Add(new nuy::graphics::Sprite(x, y, 0.09f, 0.09f, nuy::maths::Vector4(rand() % 1000 / 1000.0f, 0, 1, 1)));
 		}
 	}
+#else
+	for (float y = -9.0f; y < 9.0f; y++)
+	{
+		for (float x = -16.0f; x < 16.0f; x++)
+		{
+			layer.Add(new nuy::graphics::Sprite(x, y, 0.9f, 0.9f, nuy::maths::Vector4(rand() % 1000 / 1000.0f, 0, 1, 1)));
+		}
+	}
+#endif
 
 
 	nuy::graphics::TileLayer layer2(&shader2);
@@ -54,7 +64,8 @@ int main()
 
 	nuy::Timer timer;
 	float time = 0.0f;
-	unsigned int framesPerSecond = 0;;
+	unsigned int framesPerSecond = 0;
+
 	while (!window.IsClosed())
 	{
 		window.Clear();

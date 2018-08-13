@@ -22,9 +22,16 @@ namespace nuy { namespace maths {
 
 		static Matrix4 Identity();
 
+		Matrix4& Multiply(const Matrix4& other);
 		friend Matrix4 operator*(Matrix4 left, const Matrix4& right);
 		Matrix4& operator*=(const Matrix4& other);
-		Matrix4& Multiply(const Matrix4& other);
+
+		Vector3 Multiply(const Vector3& other) const;
+		friend Vector3 operator*(const Matrix4& left, const Vector3& right);
+
+		Vector4 Multiply(const Vector4& other) const;
+		friend Vector4 operator*(const Matrix4& left, const Vector4& right);
+
 
 		static Matrix4 Orthographic(float left, float right, float bottom, float top, float near, float far);
 		static Matrix4 Perspective(float fov, float aspectRation, float near, float far);

@@ -90,22 +90,22 @@ namespace nuy { namespace graphics {
 
 		unsigned int colorBytes = a << 24 | b << 16 | g << 8 | r;
 
-		_Buffer->vertex = position;
+		_Buffer->vertex = *TransformationBack * position;
 		_Buffer->color = colorBytes;
 		_Buffer++; // advancing in memory
 
 		// second vertex
-		_Buffer->vertex = maths::Vector3(position.X, position.Y + size.Y, position.Z);
+		_Buffer->vertex = *TransformationBack * maths::Vector3(position.X, position.Y + size.Y, position.Z);
 		_Buffer->color = colorBytes;
 		_Buffer++;
 
 		// third vertex
-		_Buffer->vertex = maths::Vector3(position.X + size.X, position.Y + size.Y, position.Z);
+		_Buffer->vertex = *TransformationBack * maths::Vector3(position.X + size.X, position.Y + size.Y, position.Z);
 		_Buffer->color = colorBytes;
 		_Buffer++;
 
 		// fourth vertex
-		_Buffer->vertex = maths::Vector3(position.X + size.X, position.Y, position.Z);
+		_Buffer->vertex = *TransformationBack * maths::Vector3(position.X + size.X, position.Y, position.Z);
 		_Buffer->color = colorBytes;
 		_Buffer++; // FIX(andrey): should we advance it once more since we have only 4 vertices?
 
