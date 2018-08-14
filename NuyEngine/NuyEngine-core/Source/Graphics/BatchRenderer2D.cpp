@@ -1,6 +1,5 @@
 #include "BatchRenderer2D.h"
 
-
 namespace nuy { namespace graphics {
 
 	BatchRenderer2D::BatchRenderer2D()

@@ -1,4 +1,5 @@
 #include "Simple2DRenderer.h"
+#include "Renderable2D.h"
 
 namespace nuy {	namespace graphics {
 

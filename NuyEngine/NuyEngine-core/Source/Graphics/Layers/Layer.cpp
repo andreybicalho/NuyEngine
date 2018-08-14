@@ -32,7 +32,7 @@ namespace nuy { namespace graphics {
 		Renderer->Begin();
 		for (const Renderable2D* renderable : Renderables)
 		{
-			Renderer->Submit(renderable);
+			renderable->Submit(Renderer);
 		}
 		Renderer->End();
 		Renderer->Draw();

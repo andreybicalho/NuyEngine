@@ -20,6 +20,8 @@
 
 #include "Graphics/Layers/TileLayer.h"
 
+#include "Graphics/Layers/Group.h"
+
 #define TEST_50K_SPRITES 0
 
 int main()
@@ -56,11 +58,17 @@ int main()
 			layer.Add(new nuy::graphics::Sprite(x, y, 0.9f, 0.9f, nuy::maths::Vector4(rand() % 1000 / 1000.0f, 0, 1, 1)));
 		}
 	}
+	
+	nuy::graphics::Group* group = new nuy::graphics::Group(nuy::maths::Matrix4::Translate(nuy::maths::Vector3(-15.0f, 5.0f, 0.0f)));
+	group->Add(new nuy::graphics::Sprite(0, 0, 6, 3, nuy::maths::Vector4(1, 0.5f, 0, 1)));
+	group->Add(new nuy::graphics::Sprite(0.5f, 0.5f, 5.0f, 2.0f, nuy::maths::Vector4(1, 1, 0, 1)));
+
+	layer.Add(group);
 #endif
 
 
 	nuy::graphics::TileLayer layer2(&shader2);
-	layer2.Add(new nuy::graphics::Sprite(-2, 2, 4, 4, nuy::maths::Vector4(1, 0, 1, 1)));
+	layer2.Add(new nuy::graphics::Sprite(-2, 2, 4, 4, nuy::maths::Vector4(0, 1, 1, 1)));
 
 	nuy::Timer timer;
 	float time = 0.0f;
@@ -74,9 +82,9 @@ int main()
 		double x, y;
 		window.GetMousePosition(x, y);
 		shader.Enable();
-		shader.SetUniform2f("in_light_pos", nuy::maths::Vector2(-8, -3));
+		shader.SetUniform2f("in_light_pos", nuy::maths::Vector2((float)(x * 32.0f / 960.0f - 16.0f), (float)(9.0f - y * 18.0f / 540.0f)));
 		shader2.Enable();
-		shader2.SetUniform2f("in_light_pos", nuy::maths::Vector2((float)(x * 32.0f / 960.0f - 16.0f), (float)(9.0f - y * 18.0f / 540.0f)));
+		shader2.SetUniform2f("in_light_pos", nuy::maths::Vector2(-8, -3));
 
 		// our cool animation
 		nuy::maths::Matrix4 mat = nuy::maths::Matrix4::Translate(nuy::maths::Vector3(2, 2, 5));

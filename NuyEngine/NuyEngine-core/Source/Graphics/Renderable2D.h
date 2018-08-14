@@ -4,6 +4,8 @@
 #include "Buffers/IndexBuffer.h"
 #include "Buffers/VertexArray.h"
 
+#include "Renderer2D.h"
+
 #include "../Maths/Maths.h"
 #include "Shader.h"
 
@@ -22,13 +24,19 @@ namespace nuy {	namespace graphics {
 		maths::Vector3 Position;
 		maths::Vector2 Size;
 		maths::Vector4 Color;
-	
+	protected:
+		Renderable2D() { }
 	public:
 		Renderable2D(maths::Vector3 position, maths::Vector2 size, maths::Vector4 color)
 			: Position(position), Size(size), Color(color)
 		{ }
 
 		virtual ~Renderable2D() { }
+
+		virtual void Submit(Renderer2D* renderer) const 
+		{
+			renderer->Submit(this);
+		}
 
 		inline const maths::Vector3& GetPosition() const { return Position; }
 		inline const maths::Vector2& GetSize() const { return Size; }

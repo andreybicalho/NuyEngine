@@ -17,6 +17,7 @@
     <ClCompile Include="Source\Graphics\StaticSprite.cpp" />
     <ClCompile Include="Source\Graphics\Layers\Layer.cpp" />
     <ClCompile Include="Source\Graphics\Layers\TileLayer.cpp" />
+    <ClCompile Include="Source\Graphics\Layers\Group.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Graphics\Window.h" />
@@ -40,6 +41,7 @@
     <ClInclude Include="Source\Utils\Timer.h" />
     <ClInclude Include="Source\Graphics\Layers\Layer.h" />
     <ClInclude Include="Source\Graphics\Layers\TileLayer.h" />
+    <ClInclude Include="Source\Graphics\Layers\Group.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Resources\vertexShader.shader" />

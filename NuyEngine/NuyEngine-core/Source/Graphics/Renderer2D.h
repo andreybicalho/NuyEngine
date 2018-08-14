@@ -1,11 +1,14 @@
 #pragma once
 
+#include <vector>
+
 #include <Gl/glew.h>
 
 #include "../Maths/Maths.h"
-#include "Renderable2D.h"
 
 namespace nuy {	namespace graphics {
+
+	class Renderable2D;
 
 	class Renderer2D
 	{
