@@ -24,30 +24,33 @@
 
 #define TEST_50K_SPRITES 0
 
+using namespace nuy::graphics;
+using namespace nuy::maths;
+
 int main()
 {
-	nuy::graphics::Window window("Nuy Engine", 960, 540);
+	Window window("Nuy Engine", 960, 540);
 
-	nuy::maths::Matrix4 ortho = nuy::maths::Matrix4::Orthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f); // 16x9 space hence 16:9 aspect ratio
+	Matrix4 ortho = Matrix4::Orthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f); // 16x9 space hence 16:9 aspect ratio
 
-	nuy::graphics::Shader* s = new nuy::graphics::Shader("Source/Resources/vertexShader.shader", "Source/Resources/fragmentShader.shader");
-	nuy::graphics::Shader* s2 = new nuy::graphics::Shader("Source/Resources/vertexShader.shader", "Source/Resources/fragmentShader.shader");
-	nuy::graphics::Shader& shader = *s;
-	nuy::graphics::Shader& shader2 = *s2;
+	Shader* s = new Shader("Source/Resources/vertexShader.shader", "Source/Resources/fragmentShader.shader");
+	Shader* s2 = new Shader("Source/Resources/vertexShader.shader", "Source/Resources/fragmentShader.shader");
+	Shader& shader = *s;
+	Shader& shader2 = *s2;
 	shader.Enable();
 	shader2.Enable();
 
-	shader.SetUniform2f("in_light_pos", nuy::maths::Vector2(0.0f, 0.0f));
-	shader2.SetUniform2f("in_light_pos", nuy::maths::Vector2(0.0f, 0.0f));
+	shader.SetUniform2f("in_light_pos", Vector2(0.0f, 0.0f));
+	shader2.SetUniform2f("in_light_pos", Vector2(0.0f, 0.0f));
 
+	TileLayer layer(&shader);
 
-	nuy::graphics::TileLayer layer(&shader);
 #if TEST_50K_SPRITES
 	for (float y = -9.0f; y < 9.0f; y += 0.1f)
 	{
 		for (float x = -16.0f; x < 16.0f; x += 0.1f)
 		{
-			layer.Add(new nuy::graphics::Sprite(x, y, 0.09f, 0.09f, nuy::maths::Vector4(rand() % 1000 / 1000.0f, 0, 1, 1)));
+			layer.Add(new Sprite(x, y, 0.09f, 0.09f, Vector4(rand() % 1000 / 1000.0f, 0, 1, 1)));
 		}
 	}
 #else
@@ -55,20 +58,25 @@ int main()
 	{
 		for (float x = -16.0f; x < 16.0f; x++)
 		{
-			layer.Add(new nuy::graphics::Sprite(x, y, 0.9f, 0.9f, nuy::maths::Vector4(rand() % 1000 / 1000.0f, 0, 1, 1)));
+			layer.Add(new Sprite(x, y, 0.9f, 0.9f, Vector4(rand() % 1000 / 1000.0f, 0, 1, 1)));
 		}
 	}
 	
-	nuy::graphics::Group* group = new nuy::graphics::Group(nuy::maths::Matrix4::Translate(nuy::maths::Vector3(-15.0f, 5.0f, 0.0f)));
-	group->Add(new nuy::graphics::Sprite(0, 0, 6, 3, nuy::maths::Vector4(1, 0.5f, 0, 1)));
-	group->Add(new nuy::graphics::Sprite(0.5f, 0.5f, 5.0f, 2.0f, nuy::maths::Vector4(1, 1, 0, 1)));
+	Matrix4 transform = Matrix4::Translate(Vector3(-15.0f, 5.0f, 0.0f)) * Matrix4::Rotate(45.0f, Vector3(0, 0, 1));
+	Group* group = new Group(transform);
+	group->Add(new Sprite(0, 0, 6, 3, Vector4(1, 1, 1, 1)));
+	
+	Group* button = new Group(Matrix4::Translate(Vector3(1.5f, 2.5f, 0.0f)));
+	button->Add(new Sprite(0, 0, 5.0f, 2.0f, Vector4(1, 0, 1, 1)));
+	button->Add(new Sprite(0.5f, 0.5f, 3.0f, 1.0f, Vector4(0.2f, 0.3f, 0.8f, 1)));
+	group->Add(button);
 
 	layer.Add(group);
 #endif
 
 
-	nuy::graphics::TileLayer layer2(&shader2);
-	layer2.Add(new nuy::graphics::Sprite(-2, 2, 4, 4, nuy::maths::Vector4(0, 1, 1, 1)));
+	TileLayer layer2(&shader2);
+	layer2.Add(new Sprite(-2, 2, 4, 4, Vector4(0, 1, 1, 1)));
 
 	nuy::Timer timer;
 	float time = 0.0f;
@@ -82,14 +90,14 @@ int main()
 		double x, y;
 		window.GetMousePosition(x, y);
 		shader.Enable();
-		shader.SetUniform2f("in_light_pos", nuy::maths::Vector2((float)(x * 32.0f / 960.0f - 16.0f), (float)(9.0f - y * 18.0f / 540.0f)));
+		shader.SetUniform2f("in_light_pos", Vector2((float)(x * 32.0f / 960.0f - 16.0f), (float)(9.0f - y * 18.0f / 540.0f)));
 		shader2.Enable();
-		shader2.SetUniform2f("in_light_pos", nuy::maths::Vector2(-8, -3));
+		shader2.SetUniform2f("in_light_pos", Vector2(-8, -3));
 
 		// our cool animation
-		nuy::maths::Matrix4 mat = nuy::maths::Matrix4::Translate(nuy::maths::Vector3(2, 2, 5));
-		mat = mat * nuy::maths::Matrix4::Rotate(timer.Elapsed() * 100.f, nuy::maths::Vector3(0, 0, 1));
-		mat = mat * nuy::maths::Matrix4::Translate(nuy::maths::Vector3(-5, -5, -5));
+		Matrix4 mat = Matrix4::Translate(Vector3(2, 2, 5));
+		mat = mat * Matrix4::Rotate(timer.Elapsed() * 100.f, Vector3(0, 0, 1));
+		mat = mat * Matrix4::Translate(Vector3(-5, -5, -5));
 		shader.SetUniformMat4("ml_matrix", mat);
 		//
 
